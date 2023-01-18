@@ -3,12 +3,14 @@ name = "astraroulette"
 version = "0.1.0"
 description = ""
 authors = ["Gosudarkin Yaroslav <gosudarkin.yaroslav@gmail.com>"]
-packages = [{include = "core"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
 numpy = "^1.24.1"
 pytest = "^7.2.1"
+Flask = "^2.2.2"
+flask-mongoengine = "^1.0.0"
+pymodm = "^0.4.3"
 
 [tool.poetry.dev-dependencies]
 

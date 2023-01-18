@@ -1,0 +1,15 @@
+version: '3'
+services:
+  mongo:
+    image: "mongo:latest"
+    restart: always
+  service:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    depends_on:
+     - mongo
+    ports:
+      - "8100:80"
+    volumes:
+     - .:/code
