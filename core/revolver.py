@@ -9,6 +9,7 @@ class Revolver:
                  drum_count: int = RevolverConfig.DEFAULT_DRUM_COUNT,
                  drum_turn_period: float = RevolverConfig.DEFAULT_DRUM_TURN_PERIOD):
         self._descr = descr
+        self._barrel_bullet_index = 0
         self._drum_count = drum_count
         self._drum_turn_period = drum_turn_period
         self._drum_load = np.zeros((drum_count,), dtype=bool)
@@ -46,4 +47,14 @@ class Revolver:
             self._drum_load = value
 
     def __str__(self):
-        return f"{self._descr} Размер барабана: {len(self._drum_load)}, время переключения между капсюлями по ттх: {self._drum_turn_period} секунд."
+        return f"{self._descr} " \
+               f"Размер барабана: {len(self._drum_load)}, " \
+               f"время переключения между капсюлями по ттх: {self._drum_turn_period} секунд."
+
+    def shot(self, total_time: float) -> bool:
+        """Imitating shot after spinning the drum.
+        Calcs new barret bullet index depends on drum's period and spinning time."""
+        normalization_coeff = 1.0 / self._drum_turn_period
+        norm_total_time = total_time * normalization_coeff
+        self._barrel_bullet_index = int(norm_total_time) % self._drum_count
+        return self._drum_load[self._barrel_bullet_index]
