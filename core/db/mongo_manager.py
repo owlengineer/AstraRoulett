@@ -1,3 +1,5 @@
+import uuid
+
 from pymodm.connection import connect
 from pymongo import DESCENDING, ASCENDING
 from core.db.mongo_models import Logs, Players, Revolvers
@@ -24,12 +26,23 @@ class DBManager:
 
         #### Players block ####
 
-    def add_player(self, name, wins = 0, deaths = 0):
-        return Players(name=name, wins=int(wins), deaths=int(deaths)).save().name
 
-    def get_player_wins(self, name):
+    def get_player(self, id):
         try:
-            p = Players.objects.get({'name': name})
+            p = Players.objects.get({'_id': id})
+            return p
+        except Players.DoesNotExist:
+            return None
+
+    def add_player(self, id, wins = 0, deaths=0):
+        if not self.get_player(id):
+            return Players(_id=id, wins=wins, deaths=deaths).save()._id
+        else:
+            return None
+
+    def get_player_wins(self, id):
+        try:
+            p = Players.objects.get({'_id': id})
             return p.wins
         except Players.DoesNotExist:
             return None
@@ -37,27 +50,37 @@ class DBManager:
     def get_all_players(self):
         return Players.objects.all()
 
-    def get_player_deaths(self, name):
+    def get_player_deaths(self, id):
         try:
-            p = Players.objects.get({'name': name})
+            p = Players.objects.get({'_id': id})
             return p.deaths
         except Players.DoesNotExist:
             return None
 
+    def inc_player_deaths(self, id):
+        p = self.get_player(id)
+        p.deaths = p.deaths + 1
+        p.save()
+
+    def inc_player_wins(self, id):
+        p = self.get_player(id)
+        p.wins = p.wins + 1
+        p.save()
+
     #### Revolvers block ####
 
     def add_revolver(self, r: Revolver):
-        return Revolvers(name=r.name, descr=r.description, drum_capacity=r.drum_capacity, drum_turn_period=r.drum_turn_period).save().name
+        return Revolvers(_id=r.name, descr=r.description, drum_capacity=r.drum_capacity).save()._id
 
     def get_all_revolvers(self):
         return Revolvers.objects.all()
 
-    def get_revolver(self, name):
+    def get_revolver(self, id):
         try:
-            r = Revolvers.objects.get({'name': name})
+            r = Revolvers.objects.get({'_id': id})
             return r
         except Revolvers.DoesNotExist:
-            return None
+          return None
 
         #### Logs block ####
     def add_log(self, log_id, time, lineno, pathname, levelname, message):

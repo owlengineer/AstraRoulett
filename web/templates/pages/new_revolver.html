@@ -10,7 +10,7 @@
 
     <h3>Add new revolver</h3>
 
-    <form id="new_promo_form" method="post" action="/api/add_revolver">
+    <form id="new_revolver_form" method="post" action="/api/add_revolver">
         <div>
             <label for="new_name">Название</label>
             <input type="text" id="new_name" name="new_name" />
@@ -22,10 +22,6 @@
         <div>
             <label for="new_drum_capacity">Размер барабана (от 4 до 8)</label>
             <input type="text" id="new_drum_capacity" name="new_drum_capacity" />
-        </div>
-        <div>
-            <label for="new_drum_turn_period">Время оборота на следующий патрон (с)</label>
-            <input type="text" id="new_drum_turn_period" name="new_drum_turn_period" />
         </div>
         <button type="submit">Добавить</button>
     </form>

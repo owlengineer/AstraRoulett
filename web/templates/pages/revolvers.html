@@ -38,14 +38,12 @@
                     <th scope="col" class="log_id">Name</th>
                     <th scope="col">descr</th>
                     <th scope="col">Capacity</th>
-                    <th scope="col">Turn period (s)</th>
                 </tr>
             {% for tr in revolvers_list %}
                 <tr>
-                    <th class="log_id">{{tr.name}}</th>
+                    <th class="log_id">{{tr._id}}</th>
                     <th>{{tr.descr}}</th>
                     <th>{{tr.drum_capacity}}</th>
-                    <th>{{tr.drum_turn_period}}</th>
                 </tr>
             {% endfor %}
         </thead>

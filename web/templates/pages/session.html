@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Astra Roulette{% endblock %}
+{% block head %}
+
+<link href="static/css/bootstrap-table.min.css" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" rel="stylesheet">
+<link href="static/css/bootstrap-datepicker.min.css" rel="stylesheet">
+<link href="static/css/prism.css" rel="stylesheet">
+
+<style>
+    .msg {
+        overflow: auto;
+        white-space: nowrap;
+        max-width: 350px;
+    }
+    .log_id {
+        white-space: nowrap; 
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+        max-width: 50px;
+    }
+    .msg_pre, code {
+        max-width:70vw !important;
+        white-space: pre-wrap !important;
+    }
+    .container {
+        max-width: 1200px;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<h3>Results</h3>
+
+<div>
+        <p> Drum load: {{drum_load}} </p>
+    <table id="results_table" class="table table-striped table-bordered table-sm " cellspacing="0"
+  width="100%">
+        <thead>
+                <tr>
+                    <th>number</th>
+                    <th>player</th>
+                    <th>barrel_index</th>
+                </tr>
+        </thead>
+        {% for number, player, idx in history %}
+            <tr>
+                <th class="log_id">{{number}}</th>
+                <th>{{player}}</th>
+                <th>{{idx}}</th>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <p>Winner: {{winner}}!</p>
+
+</div>
+
+{% endblock %}

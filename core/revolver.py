@@ -1,24 +1,29 @@
+import math
+import random
+
 import numpy as np
 
 from core.config import RevolverConfig
+
+
+import logging
+logger = logging.getLogger('root')
 
 
 class Revolver:
     def __init__(self,
                  name: str = RevolverConfig.DEF_NAME,
                  descr: str = RevolverConfig.DEF_DESCR,
-                 drum_capacity: int = RevolverConfig.DEF_DRUM_CAPACITY,
-                 drum_turn_period: float = RevolverConfig.DEF_DRUM_TURN_PERIOD):
+                 drum_capacity: int = RevolverConfig.DEF_DRUM_CAPACITY):
         self._name = name
         self._descr = descr
         self._barrel_bullet_index = 0
         self._drum_capacity = drum_capacity
-        self._drum_turn_period = drum_turn_period
         self._drum_load = np.zeros((drum_capacity,), dtype=bool)
 
     @property
-    def drum_turn_period(self):
-        return self._drum_turn_period
+    def barrel_bullet_index(self):
+        return self._barrel_bullet_index
 
     @property
     def drum_load(self):
@@ -56,19 +61,13 @@ class Revolver:
 
     def __str__(self):
         return f"{self._descr} " \
-               f"Размер барабана: {len(self._drum_load)}, " \
-               f"время переключения между капсюлями по ттх: {self._drum_turn_period} секунд."
+               f"Размер барабана: {len(self._drum_load)}"
 
-    def shot(self, total_time: float) -> bool:
+    def shot(self) -> bool:
         """
         Imitating shot after spinning the drum.
-        Calcs new barret bullet index depends on drum's period and spinning time.
-
-        @param total_time: time of drum spinning in seconds.
         """
-        normalization_coeff = 1.0 / self._drum_turn_period
-        norm_total_time = total_time * normalization_coeff
-        self._barrel_bullet_index = int(norm_total_time) % self._drum_capacity
+        self._barrel_bullet_index = random.randint(0,self.drum_capacity-1)
         return self._drum_load[self._barrel_bullet_index]
 
     def reload_drum(self, bullets_count: int = RevolverConfig.DEF_BULLETS_COUNT):
@@ -85,3 +84,4 @@ class Revolver:
         load = np.asarray(load)
         np.random.shuffle(load)
         self.drum_load = load
+        logger.info(f"Drum load generated: {self.drum_load}")

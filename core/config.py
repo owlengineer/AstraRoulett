@@ -6,7 +6,6 @@ class RevolverConfig:
     DEF_NAME: str = "Colt .44"
     DEF_DESCR: str = "Стандартный револьвер системы Colt. Классика дикого запада."
     DEF_DRUM_CAPACITY: int = 6
-    DEF_DRUM_TURN_PERIOD: float = 0.5  # seconds
     DEF_BULLETS_COUNT: int = 1
     MIN_DRUM_CAPACITY: int = 4
     MAX_DRUM_CAPACITY: int = 8

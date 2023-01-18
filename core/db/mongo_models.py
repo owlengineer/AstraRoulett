@@ -11,13 +11,12 @@ class Logs(MongoModel):
 
 
 class Players(MongoModel):
-    name = fields.CharField(primary_key=True, max_length=80)
+    _id = fields.CharField(primary_key=True)
     wins = fields.IntegerField()
     deaths = fields.IntegerField()
 
 
 class Revolvers(MongoModel):
-    name = fields.CharField(primary_key=True, max_length=80)
+    _id = fields.CharField(primary_key=True)
     descr = fields.CharField(max_length=1000)
     drum_capacity = fields.IntegerField()
-    drum_turn_period = fields.FloatField()

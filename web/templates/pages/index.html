@@ -32,9 +32,31 @@
 {% block content %}
 <h3>Astra Roulette</h3>
 
+<p> Добро пожаловать в бюджетную русскую рулетку. Сценарий игры такой -- выбираете с вашим напарником револьвер с которым хотите играть и сколько патронов зарядить в барабан. </p>
+<p> Если представленные револьверы не нравятся -- можно создать свой с помощью меню выше.
+<p> После -- вписываете свои имена в поля ниже для таблицы рекордов и нажимаете "Начать!". Вперед!</p>
+
 <div>
 
-
+    <form id="new_game_form" method="get" action="/session">
+        <div>
+            <label for="revolver_name">Револьвер (введите название)</label>
+            <input type="text" id="revolver_name" name="revolver_name" />
+        </div>
+        <div>
+            <label for="bullets_count">Сколько патронов зарядить в барабан?</label>
+            <input type="text" id="bullets_count" name="bullets_count" />
+        </div>
+        <div>
+            <label for="name1">Имя 1 игрока</label>
+            <input type="text" id="name1" name="name1" />
+        </div>
+        <div>
+            <label for="name2">Имя 2 игрока</label>
+            <input type="text" id="name2" name="name2" />
+        </div>
+        <button type="submit">Начать!</button>
+    </form>
 
 </div>
 
