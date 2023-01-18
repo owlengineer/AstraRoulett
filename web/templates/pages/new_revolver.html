@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Add revolver{% endblock %}
+
+{% block head %}
+<link href="{{url_for("static", filename="css/social.css")}}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <h3>Add new revolver</h3>
+
+    <form id="new_promo_form" method="post" action="/api/add_revolver">
+        <div>
+            <label for="new_name">Название</label>
+            <input type="text" id="new_name" name="new_name" />
+        </div>
+        <div>
+            <label for="new_descr">Описание</label>
+            <input type="text" id="new_descr" name="new_descr" />
+        </div>
+        <div>
+            <label for="new_drum_capacity">Размер барабана (от 4 до 8)</label>
+            <input type="text" id="new_drum_capacity" name="new_drum_capacity" />
+        </div>
+        <div>
+            <label for="new_drum_turn_period">Время оборота на следующий патрон (с)</label>
+            <input type="text" id="new_drum_turn_period" name="new_drum_turn_period" />
+        </div>
+        <button type="submit">Добавить</button>
+    </form>
+
+
+{% endblock %}

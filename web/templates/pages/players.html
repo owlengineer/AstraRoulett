@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}Records Table{% endblock %}
+{% block head %}
+
+<link href="static/css/bootstrap-table.min.css" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" rel="stylesheet">
+<link href="static/css/bootstrap-datepicker.min.css" rel="stylesheet">
+<link href="static/css/prism.css" rel="stylesheet">
+<link href="static/css/mdb.min.css" rel="stylesheet">
+<link href="static/css/bootstrap.min.css" rel="stylesheet">
+<link href="static/css/datatables.min.css" rel="stylesheet">
+<link href="static/css/style.css" rel="stylesheet">
+
+<style>
+    .transactions_tableWrapper {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    #transactions_table th, td {
+        white-space: nowrap;
+    }
+    .msg {
+        overflow: auto;
+        white-space: nowrap;
+        max-width: 350px;
+    }
+    .log_id {
+        white-space: nowrap; 
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+        max-width: 50px;
+    }
+    .msg_pre, code {
+        max-width:70vw !important;
+        white-space: pre-wrap !important;
+    }
+    .container {
+        max-width: 1200px;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<h3>Records Table</h3>
+
+<div>
+    <table id="records_table" class="table table-striped table-bordered table-sm " cellspacing="0"
+  width="100%">
+        <thead>
+                <tr>
+                    <th>name</th>
+                    <th>wins</th>
+                    <th>deaths</th>
+                </tr>
+        </thead>
+        {% for tr in players_list %}
+            <tr>
+                <th class="log_id">{{tr.name}}</th>
+                <th>{{tr.wins}}</th>
+                <th>{{tr.deaths}}</th>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}
+{% block script %}
+<script src="static/js/transactions_table.js"></script>
+<script src="static/js/bootstrap-table.min.js"></script>
+<script src="static/js/bootstrap-table-filter-control.min.js"></script>
+<script src="static/js/bootstrap-datepicker.min.js"></script>
+<script src="static/js/json5.min.js"></script>
+<script src="static/js/prism.js"></script>
+<script type="text/javascript" src="static/js/jquery.min.js"></script>
+<script type="text/javascript" src="static/js/popper.min.js"></script>
+<script type="text/javascript" src="static/js/mdb.min.js"></script>
+<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="static/js/datatables.min.js"></script>
+{% endblock %}
